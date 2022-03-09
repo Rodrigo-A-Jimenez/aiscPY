@@ -14,6 +14,7 @@ for i in cons:
 
 print(lista)
 
+
 '''for i in range(len(lista)):
     print(lista[i][0])'''
 con.commit()
