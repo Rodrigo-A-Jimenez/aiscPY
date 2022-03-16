@@ -1,28 +1,23 @@
 import sqlite3
 
-def queryToDict(query):
-    keys_q = [tuple[0] for tuple in query.description]
-    values_q = list(query.fetchone)
-    return toDict(keys_q, values_q)
-
-def toDict(keys: list | str, values: list) -> dict:
-    """Query selection to dictionary of values, 
-
-    Args:
-        keys (list | str): Keys's list
-        values (list): values's list
-
-    Returns:
-        dict: dictionary{'key': value}
-    """    
-    return dict(zip(keys, values))
-
 class queryingToDB():
-    def __init__(self, query: str) -> None:
+    def __init__(self, query: str, fetchone:bool = False) -> None:
+        if not isinstance(fetchone, bool):
+            raise TypeError('"fetchone" not in a bool')
+        
+        self.__fetchoneStatus = fetchone
+        
         con = sqlite3.connect('aiscpy/DataBases/shapes_AISC.db')
         cur = con.cursor()
         self.__query_execute = cur.execute(query)
-        self.__listQuery = self.__query_execute.fetchall()
+        self.__keysQuery = [tuple[0] for tuple in self.__query_execute.description]
+        
+        if(fetchone):
+            self.__query_list = list(self.__query_execute.fetchone())
+        else:
+            self.__query_list = list(self.__query_execute.fetchall())
+            
+        
         con.close()
     
     @property
@@ -30,6 +25,19 @@ class queryingToDB():
         return self.__query_execute
     
     @property
-    def listQuery(self):
-        return self.__listQuery
+    def queryToList(self):
+        return self.__query_list
     
+    @property
+    def fetchoneStatus(self):
+        return self.__fetchoneStatus
+    
+    @property
+    def keysQuery(self):
+        return self.__keysQuery
+    
+    def toDict(self):
+        if (self.__fetchoneStatus):
+            return dict(zip(self.__keysQuery, self.__query_list))
+        else:
+            raise ValueError('"fetchoneStatus" is False, not supported')
