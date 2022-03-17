@@ -1,35 +1,38 @@
+'''
+*******************************************
+*                                         *
+* author : Rodrigo Jimenez                *
+* E-mail : jimenezhuancarodrigo@gmail.com *
+* copyright : (c) 2022                    *
+* date : 2022                             *
+*                                         *
+*******************************************
+'''
+
 import sqlite3
-from aiscpy.core import queryToDict, queryingToDB
+
+from aiscpy.core import queryingToDB
+
 
 class Shape():
     def __init__(self, name: str) -> None:
+        """Querying for shape objects
+
+        Args:
+            name (str): name of the shape object or name of section
+
+        Raises:
+            TypeError: Shape must be a string
+        """        
+        
+        if not isinstance(name, str):
+            raise TypeError("Shape must be a string")
+        
         self.__name = name
-        self.__query = queryingToDB('''
-                         SELECT * FROM `W-M-S-HP_shapes_AISC`
-                         WHERE Shape= 'W44X335'
-                         ''')
-    
+        self.__queryStr: str = """SELECT * FROM `W-M-S-HP_shapes_AISC` 
+                                    WHERE Shape= '""" + self.__name + """' """ 
+        self.__query = queryingToDB(self.__queryStr, fetchone=True)
+        
+    @property    
     def query(self):
         return self.__query
-        
-        
-        
-
-con = sqlite3.connect('aiscpy/DataBases/shapes_AISC.db')
-cur = con.cursor()
-
-shape_list = cur.execute('''
-                         SELECT * FROM `W-M-S-HP_shapes_AISC`
-                         WHERE Shape= 'W44X335'
-                         ''')
-
-col_name_list = [tuple[0] for tuple in shape_list.description]
-
-lista = []
-j = 0
-for i in shape_list.fetchone(): 
-    lista.append(i)
-    
-resultado = dict(zip(col_name_list, lista))
-print(resultado)
-con.close()
