@@ -1,6 +1,8 @@
+from aiscpy.info import nameTablesDict, nameTables
+
 import sqlite3
 
-class queryingToDB():
+class QueryingToDB():
     """Class for querying to DB's AISC
     """    
     def __init__(self, query: str, fetchone:bool = False) -> None:
@@ -31,6 +33,9 @@ class queryingToDB():
         
         con.close()
     
+    def __len__(self) -> int:
+        return len(self.__query_list)
+    
     @property
     def query(self):
         """return the query class
@@ -57,3 +62,20 @@ class queryingToDB():
             return dict(zip(self.__keysQuery, self.__query_list))
         else:
             raise ValueError('"fetchoneStatus" is False, not supported')
+
+def updateTablesName():
+    query_str = ''' SELECT name FROM sqlite_master
+                    WHERE type='table' 
+                '''
+    tables = QueryingToDB(query_str)
+    nameTables = []
+    for i in range(0, len(tables)):
+        nameTables.append(tables.queryToList[i][0])
+        
+    return nameTables
+
+def selectTable(type: str)->str:
+    for i in nameTables:
+        if(type in nameTablesDict[i]):
+            return i
+    raise ValueError('not found table')

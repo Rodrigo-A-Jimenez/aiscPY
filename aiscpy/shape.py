@@ -11,7 +11,7 @@
 
 import sqlite3
 
-from aiscpy.core import queryingToDB
+from aiscpy.core import QueryingToDB
 
 
 class Shape():
@@ -31,7 +31,7 @@ class Shape():
         self.__name = name
         self.__queryStr: str = """SELECT * FROM `W-M-S-HP_shapes_AISC` 
                                     WHERE Shape= '""" + self.__name + """' """ 
-        self.__query = queryingToDB(self.__queryStr, fetchone=True)
+        self.__query = QueryingToDB(self.__queryStr, fetchone=True)
         
     @property    
     def query(self):

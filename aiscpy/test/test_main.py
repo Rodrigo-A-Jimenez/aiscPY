@@ -1,12 +1,12 @@
-from aiscpy.core import queryingToDB
+from aiscpy.core import QueryingToDB
 
-B = queryingToDB('''
+B = QueryingToDB('''
                          SELECT Shape, A FROM `W-M-S-HP_shapes_AISC`
                          WHERE Shape= 'W44X335'
                          ''', fetchone=True)
 
 def test_init_queryingToDB():
-    A = queryingToDB('''
+    A = QueryingToDB('''
                          SELECT * FROM `W-M-S-HP_shapes_AISC`
                          WHERE Shape= 'W44X335'
                          ''', fetchone=True)
