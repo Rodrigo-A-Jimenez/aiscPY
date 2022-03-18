@@ -67,7 +67,7 @@ class QueryingToDB():
         else:
             raise ValueError('"fetchoneStatus" is False, not supported')
 
-def updateTablesName():
+def updateTablesName(): #desused
     query_str = ''' SELECT name FROM sqlite_master
                     WHERE type='table' 
                 '''
