@@ -1,6 +1,10 @@
-from aiscpy.info import nameTablesDict, nameTables
-
+import os.path
 import sqlite3
+
+from aiscpy.info import nameTables, nameTablesDict
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_path = os.path.join(BASE_DIR,'shapes_AISC.db')
 
 class QueryingToDB():
     """Class for querying to DB's AISC
@@ -20,7 +24,7 @@ class QueryingToDB():
         
         self.__fetchoneStatus = fetchone
         
-        con = sqlite3.connect('aiscpy/DataBases/shapes_AISC.db')
+        con = sqlite3.connect(db_path)
         cur = con.cursor()
         self.__query_execute = cur.execute(query)
         self.__keysQuery = [tuple[0] for tuple in self.__query_execute.description]
