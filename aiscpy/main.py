@@ -1,4 +1,4 @@
-import sqlite3 
+import sqlite3
 
 con = sqlite3.connect('aiscpy/DataBases/shapes_AISC.db')
 cur = con.cursor()
