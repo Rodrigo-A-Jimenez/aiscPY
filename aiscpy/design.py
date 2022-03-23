@@ -10,7 +10,7 @@ class SelectByCriteria():
         if not isinstance(typeShape, str):
             raise TypeError('typeShape must be a string')
         if not isinstance(prop, str):
-            raise TypeError('char or characteristic must be a string, example: "Sx" ')
+            raise TypeError ('property name must be a string, example: "Sx" ')
         if not isinstance(propCriteria, (list, int, float)):
             raise TypeError('Criteria must be a number, or list of number, [min: float, max: float]')
         
@@ -24,5 +24,17 @@ class SelectByCriteria():
             self.__minCriteria = self.__propCriteria[0]
             self.__maxCriteria = self.__propCriteria[1]
         else:
-             self.__minCriteria = self.__propCriteria
-             self.__maxCriteria = self.__propCriteria
+            self.__minCriteria = self.__propCriteria
+            self.__maxCriteria = self.__propCriteria
+    
+    @property
+    def minCriteria(self):
+        return self.__minCriteria
+    
+    @property
+    def maxCriteria(self):
+        return self.__maxCriteria
+    
+    @property
+    def propCriteria(self):
+        return self.__propCriteria
