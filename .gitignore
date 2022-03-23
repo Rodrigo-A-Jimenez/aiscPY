@@ -13,6 +13,7 @@ vscode/
 # C extensions
 *.so
 
+
 # Distribution / packaging
 .Python
 build/
@@ -159,6 +160,7 @@ cython_debug/
 #.idea/
 
 ### VisualStudioCode ###
+.vscode/
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
