@@ -1,40 +1,36 @@
 '''
 clase para diseño de elementos de estructuras metalicas.
 '''
-def criteria(list: list):
-    pass
+from aiscpy.core import selectTable
 
-
+def queryForSelect() -> str:
+    str1 = "SELECT 'Shape' "
 class SelectByCriteria():
-    def __init__(self, typeShape: str, prop: str, propCriteria: list|int|float) -> None:
+    def __init__(self, typeShape: str, prop: str, criteria: float|int, typeCriteria = 'min') -> None:
+        
         if not isinstance(typeShape, str):
             raise TypeError('typeShape must be a string')
         if not isinstance(prop, str):
             raise TypeError ('property name must be a string, example: "Sx" ')
-        if not isinstance(propCriteria, (list, int, float)):
-            raise TypeError('Criteria must be a number, or list of number, [min: float, max: float]')
+        if not isinstance(criteria, (int, float)):
+            raise TypeError('Criteria must be a number')
+        if (typeCriteria != 'min' or typeCriteria != 'max' or typeCriteria != 'equal'):
+            raise ValueError('typeCriteria must be a string in ["max", "min", "equal"]')
         
-        self.__typeShape = typeShape
+        self.__typeShape :str = typeShape
         self.__prop = prop
-        self.__propCriteria = propCriteria
+        self.__criteria = criteria
+        self.__typeCriteria =  typeCriteria
         
-        if isinstance(self.__propCriteria, list):
-            if len(self.__propCriteria) != 2:
-                raise ValueError('List must be a list with two elements')
-            self.__minCriteria = self.__propCriteria[0]
-            self.__maxCriteria = self.__propCriteria[1]
+        self.__table: str = selectTable(self.__typeShape)
+        
+        if self.__criteria == 'min':
+            pass
+        elif self.__criteria == 'max':
+            pass
+        elif self.__criteria == 'equal':
+            pass
         else:
-            self.__minCriteria = self.__propCriteria
-            self.__maxCriteria = self.__propCriteria
+            raise ValueError('typeCriteria must be a string in ["max", "min", "equal"]')
+        
     
-    @property
-    def minCriteria(self):
-        return self.__minCriteria
-    
-    @property
-    def maxCriteria(self):
-        return self.__maxCriteria
-    
-    @property
-    def propCriteria(self):
-        return self.__propCriteria

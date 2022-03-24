@@ -1,5 +1,6 @@
 import os.path
 import sqlite3
+import string
 
 from aiscpy.info import nameTables, nameTablesDict
 
@@ -85,3 +86,18 @@ def selectTable(type: str)->str:
         if(type in nameTablesDict[i]):
             return i
     raise ValueError('not found table')
+
+def strForSelect(table: str ,name = 'Shape', all = False):
+    if not isinstance(table, str):
+        raise TypeError("table must be a string")
+    if not isinstance(name, str):
+        raise TypeError("table must be a string")
+    if not isinstance(all, bool):
+        raise TypeError("all must be a boolean")
+    
+    if all:
+        instruction = "SELECT * FROM {} ".format(table)
+    else:
+        instruction = "SELECT '{}' FROM {} ".format(name, table)
+    
+    return instruction
