@@ -1,6 +1,5 @@
 import os.path
 import sqlite3
-import string
 
 from aiscpy.info import nameTables, nameTablesDict
 
@@ -101,3 +100,22 @@ def strForSelect(table: str ,name = 'Shape', all = False):
         instruction = "SELECT '{}' FROM {} ".format(name, table)
     
     return instruction
+
+def strForWhere(prop:str, value: float|int, type: str )->str:
+    if not isinstance(prop, str):
+        raise TypeError('prop must be a string')
+    if not isinstance(value, (float, int)):
+        raise TypeError('value must be a number')
+    if (type!='min' or type !='max' or type !='equal'):
+        raise TypeError('type must be a string in ["max", "min", "equal"]')
+    
+    if type == 'min':
+        commandText = "WHERE {} >= {} ".format(prop, value)
+    elif type == 'max' :
+        commandText = "WHERE {} <= {} ".format(prop, value)
+    elif type == 'equal':
+        commandText = "WHERE {} = {} ".format(prop, value)
+    else:
+        raise ValueError('type not is "max" or "min" or "equal"')
+    
+    return commandText

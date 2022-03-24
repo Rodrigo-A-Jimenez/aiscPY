@@ -1,7 +1,5 @@
-'''
-clase para diseño de elementos de estructuras metalicas.
-'''
-from aiscpy.core import selectTable
+
+from aiscpy.core import QueryingToDB, selectTable, strForSelect, strForWhere
 
 def queryForSelect() -> str:
     str1 = "SELECT 'Shape' "
@@ -23,14 +21,10 @@ class SelectByCriteria():
         self.__typeCriteria =  typeCriteria
         
         self.__table: str = selectTable(self.__typeShape)
+        self.__strSelect: str = strForSelect(self.__table, all=True)
+        self.__strWhere: str = strForWhere(self.__prop, self.__criteria, self.__typeCriteria)
         
-        if self.__criteria == 'min':
-            pass
-        elif self.__criteria == 'max':
-            pass
-        elif self.__criteria == 'equal':
-            pass
-        else:
-            raise ValueError('typeCriteria must be a string in ["max", "min", "equal"]')
+        self.__command = self.__strSelect + self.__strWhere
         
-    
+        self.__primaryQuery = QueryingToDB(self.__command, fetchone=True)
+        self.__secondaryQuery = QueryingToDB(self.__command)
