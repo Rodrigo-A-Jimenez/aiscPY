@@ -1,10 +1,10 @@
 
-from aiscpy.core import QueryingToDB, selectTable, strForSelect, strForWhere
+from aiscpy.core import QueryingToDB, ascOrDesc, selectTable, strForOrdered, strForSelect, strForWhere
 
 def queryForSelect() -> str:
     str1 = "SELECT 'Shape' "
 class SelectByCriteria():
-    def __init__(self, typeShape: str, prop: str, criteria: float|int, typeCriteria = 'min') -> None:
+    def __init__(self, typeShape: str, prop: str, criteria: float|int, typeCriteria:str) -> None:
         
         if not isinstance(typeShape, str):
             raise TypeError('typeShape must be a string')
@@ -23,8 +23,11 @@ class SelectByCriteria():
         self.__table: str = selectTable(self.__typeShape)
         self.__strSelect: str = strForSelect(self.__table, all=True)
         self.__strWhere: str = strForWhere(self.__prop, self.__criteria, self.__typeCriteria)
+        self.__strOrderedAsc: str = ""
+        if self.__typeCriteria != 'equal':
+            self.__strOrderedAsc: str = strForOrdered(self.__prop, asc= ascOrDesc(self.__typeCriteria))
         
-        self.__command = self.__strSelect + self.__strWhere
+        self.__command = self.__strSelect + self.__strWhere + self.__strOrderedAsc
         
         self.__primaryQuery = QueryingToDB(self.__command, fetchone=True)
         self.__secondaryQuery = QueryingToDB(self.__command)

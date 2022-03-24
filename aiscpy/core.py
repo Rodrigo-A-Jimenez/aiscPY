@@ -119,3 +119,20 @@ def strForWhere(prop:str, value: float|int, type: str )->str:
         raise ValueError('type not is "max" or "min" or "equal"')
     
     return commandText
+
+def ascOrDesc(type)->bool:
+    if (type == 'min'):
+        return True
+    elif (type == 'max'):
+        return False
+
+def strForOrdered(prop: str, asc: bool= True):
+    if not isinstance(prop, str):
+        raise TypeError('prop must be a string')
+    if not isinstance(asc, bool):
+        raise TypeError('asc must be a boolean')
+    
+    if asc:
+        commandText = "ORDER BY `{}` ASC "
+    else:
+        commandText = "ORDER BY `{}` DESC "
