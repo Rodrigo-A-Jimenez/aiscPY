@@ -56,3 +56,8 @@ def test_strForOrdered():
     o2_test = "ORDER BY `Shape` ASC "
     o3_test = "ORDER BY `t` DESC "
     o4_test = "ORDER BY `Sx` DESC "
+    
+    assert o1 == o1_test
+    assert o2 == o2_test
+    assert o3 == o3_test
+    assert o4 == o4_test

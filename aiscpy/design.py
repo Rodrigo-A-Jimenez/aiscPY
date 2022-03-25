@@ -12,7 +12,7 @@ class SelectByCriteria():
             raise TypeError ('property name must be a string, example: "Sx" ')
         if not isinstance(criteria, (int, float)):
             raise TypeError('Criteria must be a number')
-        if (typeCriteria != 'min' or typeCriteria != 'max' or typeCriteria != 'equal'):
+        if not typeCriteria in ['max', 'min', 'equal']:
             raise ValueError('typeCriteria must be a string in ["max", "min", "equal"]')
         
         self.__typeShape :str = typeShape
@@ -24,10 +24,15 @@ class SelectByCriteria():
         self.__strSelect: str = strForSelect(self.__table, all=True)
         self.__strWhere: str = strForWhere(self.__prop, self.__criteria, self.__typeCriteria)
         self.__strOrderedAsc: str = ""
+        
         if self.__typeCriteria != 'equal':
-            self.__strOrderedAsc: str = strForOrdered(self.__prop, asc= ascOrDesc(self.__typeCriteria))
+            self.__strOrderedAsc += strForOrdered(self.__prop, asc= ascOrDesc(self.__typeCriteria))
         
         self.__command = self.__strSelect + self.__strWhere + self.__strOrderedAsc
         
         self.__primaryQuery = QueryingToDB(self.__command, fetchone=True)
         self.__secondaryQuery = QueryingToDB(self.__command)
+    
+    @property
+    def query(self):
+        return self.__primaryQuery

@@ -128,7 +128,7 @@ def ascOrDesc(type: str)->bool:
     elif (type == 'max'):
         return False
 
-def strForOrdered(prop: str, asc: bool= True):
+def strForOrdered(prop: str, asc: bool= True)->str:
     if not isinstance(prop, str):
         raise TypeError('prop must be a string')
     if not isinstance(asc, bool):
@@ -138,3 +138,5 @@ def strForOrdered(prop: str, asc: bool= True):
         commandText = "ORDER BY `{}` ASC ".format(prop)
     else:
         commandText = "ORDER BY `{}` DESC ".format(prop)
+        
+    return commandText
