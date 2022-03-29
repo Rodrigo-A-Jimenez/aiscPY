@@ -97,7 +97,7 @@ def strForSelect(table: str ,name = 'Shape', all = False):
     if all:
         instruction = "SELECT * FROM {} ".format(table)
     else:
-        instruction = "SELECT '{}' FROM {} ".format(name, table)
+        instruction = "SELECT `{}` FROM {} ".format(name, table)
     
     return instruction
 
@@ -110,11 +110,11 @@ def strForWhere(prop:str, value: float|int, type: str )->str:
         raise TypeError('type must be a string in ["max", "min", "equal"]')
     
     if type == 'min':
-        commandText = "WHERE {} >= {} ".format(prop, value)
+        commandText = "WHERE `{}` >= {} ".format(prop, value)
     elif type == 'max' :
-        commandText = "WHERE {} <= {} ".format(prop, value)
+        commandText = "WHERE `{}` <= {} ".format(prop, value)
     elif type == 'equal':
-        commandText = "WHERE {} = {} ".format(prop, value)
+        commandText = "WHERE `{}` = {} ".format(prop, value)
     else:
         raise ValueError('type not is "max" or "min" or "equal"')
     

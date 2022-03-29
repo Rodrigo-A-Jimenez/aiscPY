@@ -23,6 +23,7 @@ class SelectByCriteria():
         self.__strSelect: str = strForSelect(self.__table, all=True)
         self.__strWhere: str = strForWhere(
             self.__prop, self.__criteria, self.__typeCriteria)
+        self.__strType: str = "AND Type = '{}'".format(self.__typeShape)
         self.__strOrderedAsc: str = ""
 
         if self.__typeCriteria != 'equal':
