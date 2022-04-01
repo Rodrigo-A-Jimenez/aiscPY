@@ -2,8 +2,23 @@
 from aiscpy.core import QueryingToDB, ascOrDesc, selectTable, strForOrdered, strForSelect, strForWhere
 
 class SelectByCriteria():
+    """a class for select a shape by criteria
+    """    
     def __init__(self, typeShape: str, prop: str, criteria: float | int, typeCriteria: str) -> None:
+        """a class for select a shape by criteria
 
+        Args:
+            typeShape (str): Type of a Shape
+            prop (str): select a property of the shape for select
+            criteria (float | int): value of the prop
+            typeCriteria (str): a string in [min, max, equal]
+
+        Raises:
+            TypeError: typeShape must be a string
+            TypeError: prop must be a string
+            TypeError: Criteria must be a float or int
+            ValueError: typeCriteria must be a string in [min, max, equal]
+        """        
         if not isinstance(typeShape, str):
             raise TypeError('typeShape must be a string')
         if not isinstance(prop, str):
@@ -37,4 +52,9 @@ class SelectByCriteria():
 
     @property
     def query(self):
+        """a query for select a shape by criteria
+
+        Returns:
+            Query: QueryingToDB
+        """        
         return self.__primaryQuery

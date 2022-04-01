@@ -15,11 +15,13 @@ from aiscpy.core import QueryingToDB, selectTable
 
 
 class Shape():
+    """A object with a determinate shape
+    """    
     def __init__(self, typeShape: str,name: str) -> None:
         """Querying for shape objects
 
         Args:
-            type (str): type of the section ('W')
+            typeShape (str): type of the section ('W')
             name (str): name of the shape object or name of section ('W44X335')
 
         Raises:
@@ -41,8 +43,18 @@ class Shape():
         
     @property    
     def query(self):
+        """a method for return data of a shape
+
+        Returns:
+            Query: Data of a shape
+        """        
         return self.__query
     
     @property
     def table(self):
+        """return table name
+
+        Returns:
+            str: name of the table
+        """        
         return self.__table

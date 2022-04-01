@@ -67,9 +67,12 @@ class QueryingToDB():
         else:
             raise ValueError('"fetchoneStatus" is False, not supported')
 
+def updateTablesName():
+    """update the name of the tables in the DB
 
-
-def updateTablesName(): #desused
+    Returns:
+        list: list of the name of the tables in the DB
+    """    
     query_str = ''' SELECT name FROM sqlite_master
                     WHERE type='table' 
                 '''
@@ -81,16 +84,42 @@ def updateTablesName(): #desused
     return nameTables
 
 def selectTable(type: str)->str:
+    """select a table of a type of shapes
+
+    Args:
+        type (str): Type of the shape, example: W, C, MC, Pipe, ...
+
+    Raises:
+        ValueError: not found table
+
+    Returns:
+        str: name of the table in ``
+    """    
     for i in nameTables:
         if(type in nameTablesDict[i]):
             return i
     raise ValueError('not found table')
 
 def strForSelect(table: str ,name = 'Shape', all = False):
+    """is a method for generate a execute command for select
+
+    Args:
+        table (str): table's name. Return of the method ``selectTable``
+        name (str, optional): name of the shape. Defaults to 'Shape'.
+        all (bool, optional): all is True if SELECT * or SELECT 'name: str'. Defaults to False.
+
+    Raises:
+        TypeError: table must be a string
+        TypeError: name must be a string
+        TypeError: all must be a bool
+
+    Returns:
+        str: a string for execute command
+    """    
     if not isinstance(table, str):
         raise TypeError("table must be a string")
     if not isinstance(name, str):
-        raise TypeError("table must be a string")
+        raise TypeError("name must be a string")
     if not isinstance(all, bool):
         raise TypeError("all must be a boolean")
     
@@ -102,6 +131,22 @@ def strForSelect(table: str ,name = 'Shape', all = False):
     return instruction
 
 def strForWhere(prop:str, value: float|int, type: str )->str:
+    """a string for execute command for where
+
+    Args:
+        prop (str): property of the shape
+        value (float | int): a criteria value for the SELECT and WHERE
+        type (str): type of the criteria, [min, max, equal]
+
+    Raises:
+        TypeError: prop must be a string
+        TypeError: value must be a float or int
+        TypeError: type must be a string
+        ValueError: type not in ['min', 'max', 'equal']
+
+    Returns:
+        str: a string for execute command
+    """    
     if not isinstance(prop, str):
         raise TypeError('prop must be a string')
     if not isinstance(value, (float, int)):
@@ -121,6 +166,17 @@ def strForWhere(prop:str, value: float|int, type: str )->str:
     return commandText
 
 def ascOrDesc(type: str)->bool:
+    """a method for generate a execute command for order by
+
+    Args:
+        type (str): a string in ['min', 'max']
+
+    Raises:
+        TypeError: type , must be a string [min, max]
+
+    Returns:
+        bool: True or False, True if ASC, False if DESC
+    """    
     if not isinstance(type, str):
         raise TypeError('type must be a string')
     if (type == 'min'):
@@ -129,6 +185,19 @@ def ascOrDesc(type: str)->bool:
         return False
 
 def strForOrdered(prop: str, asc: bool= True)->str:
+    """a method for generate a execute command for order by
+
+    Args:
+        prop (str): property of the shape
+        asc (bool, optional): if is asc is true, please use method arcOrDesc. Defaults to True.
+
+    Raises:
+        TypeError: prop must be a string
+        TypeError: asc must be a boolean
+
+    Returns:
+        str: string for execute command
+    """    
     if not isinstance(prop, str):
         raise TypeError('prop must be a string')
     if not isinstance(asc, bool):

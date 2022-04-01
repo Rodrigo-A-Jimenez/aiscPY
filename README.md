@@ -8,11 +8,11 @@ Propiedades de los perfiles y unidades:
 
 ## W, S, M, HP Shapes
 
-<img src="img\W-Shape.png" width=40% height=40%>
+<img src="https://raw.githubusercontent.com/Rodrigo-A-Jimenez/aiscPY/main/img/W-Shape.png" width=40% height=40%>
 
 ## C, MC Shapes
 
-<img src="img\C-Shape.png" width=40% height=40%>
+<img src="https://raw.githubusercontent.com/Rodrigo-A-Jimenez/aiscPY/main/img/C-Shape.png" width=40% height=40%>
 
 
 **A** =	Cross-sectional area of member (in.^2)
@@ -111,13 +111,21 @@ Propiedades de los perfiles y unidades:
 
 **XXS** =	Double-extra strong pipe section
 
+## **¿Deseas colaborar?**
 
+Por favor contactate al correo electronico que aparece al final.
+
+## **¿Deseas aprender?**
+
+Por favor contactate al correo electronico que aparece al final.
 
 AISC: American Institute Steel of Construction
-Autor: Rodrigo Jimenez
-Email: jimenezhuancarodrigo en gmail punto com
 
-Reference:
+**Autor:** Rodrigo Jimenez
+
+**Email:** jimenezhuancarodrigo@gmail.com
+
+**Reference:**
   The shapes contained in this database are taken from the AISC Version 13.0
   "Shapes Database" CD-ROM Version (12/2005), as well as those listed in the
   AISC 13th Edition Manual of Steel Construction (12/2005).
