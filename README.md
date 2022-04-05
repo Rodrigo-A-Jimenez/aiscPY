@@ -126,6 +126,7 @@ AISC: American Institute Steel of Construction
 **Email:** jimenezhuancarodrigo@gmail.com
 
 **Reference:**
+
   The shapes contained in this database are taken from the AISC Version 13.0
   "Shapes Database" CD-ROM Version (12/2005), as well as those listed in the
   AISC 13th Edition Manual of Steel Construction (12/2005).
